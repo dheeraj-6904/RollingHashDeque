@@ -19,14 +19,7 @@ sliding window, and content-defined chunking.
 pip install hashdeque
 ```
 
-Development setup:
-
-```bash
-uv venv
-uv pip install -e ".[dev]"
-```
-
-## Usage
+## Quick usage
 
 ```python
 from hashdeque import HashDeque
@@ -44,28 +37,15 @@ print(d == other)   # True, O(1) comparison
 d.verify = True     # opt in to exact verification on a hash match
 ```
 
-## Test
+## API at a glance
 
-```bash
-pytest
-```
+- `HashDeque(initial="", *, params=DEFAULT_PARAMS, verify=False)`
+- `push_front(char)`, `push_back(char)`
+- `pop_front()`, `pop_back()`
+- `hash()` / `fingerprint`
+- `extend(chars)`, `extendleft(chars)`, `clear()`
 
-## Layout
+## Docs for contributors and internals
 
-```
-hashdeque/
-├── pyproject.toml
-├── repo_structure.yaml         # enforced by the repo-structure pre-commit hook
-├── .pre-commit-config.yaml
-├── .github/workflows/publish.yml
-├── src/hashdeque/
-│   ├── __init__.py             # public API
-│   ├── base.py                 # BaseHashDeque (ABC) — the contract
-│   ├── params.py               # HashParams — bases/moduli/inverses
-│   ├── deque.py                # HashDeque — polynomial double-hash implementation
-│   └── py.typed
-└── tests/
-    ├── test_base.py
-    ├── test_params.py
-    └── test_hashdeque.py
-```
+- [Design and internals](docs/design.md)
+- [Contributing guide](CONTRIBUTING.md)

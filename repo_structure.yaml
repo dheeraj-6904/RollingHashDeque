@@ -5,8 +5,10 @@ structure_rules:
     - require: 'LICENSE'
     - require: 'pyproject\.toml'
     - require: '\.pre-commit-config\.yaml'
+    - allow: 'CONTRIBUTING\.md'
     - allow: 'src/'
     - allow: 'tests/'
+    - allow: 'docs/'
     - allow: '\.github/'
 
   src_rule:
@@ -24,6 +26,10 @@ structure_rules:
     - allow: '__init__\.py'
     - require: 'test_.*\.py'
     - allow: '.*\.py'
+
+  docs_rule:
+    - description: "Documentation files"
+    - allow: '.*\.md'
 
   github_rule:
     - description: "GitHub configuration directory"
@@ -46,6 +52,9 @@ directory_map:
   /tests/:
     - description: "Tests"
     - use_rule: tests_rule
+  /docs/:
+    - description: "Documentation"
+    - use_rule: docs_rule
   /.github/:
     - description: "GitHub metadata"
     - use_rule: github_rule
