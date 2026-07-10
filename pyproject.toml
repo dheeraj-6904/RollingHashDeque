@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hashdeque"
-version = "0.0.1"
+version = "0.0.2"
 description = "A string/bytes deque with an O(1) rolling hash and O(1) equality between instances."
 readme = "README.md"
 requires-python = ">=3.9"
