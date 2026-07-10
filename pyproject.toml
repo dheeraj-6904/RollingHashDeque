@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hashdeque"
+version = "0.0.1"
+description = "A string/bytes deque with an O(1) rolling hash and O(1) equality between instances."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "dheeraj-6904", email = "dheerajmandoliya@gmail.com" }]
+keywords = ["rolling-hash", "deque", "rabin-karp", "hashing", "sliding-window", "hashdeque"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/dheeraj-6904/RollingHashDeque"
+Repository = "https://github.com/dheeraj-6904/RollingHashDeque"
+Issues = "https://github.com/dheeraj-6904/RollingHashDeque/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "repo-structure", "pre-commit"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hashdeque"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

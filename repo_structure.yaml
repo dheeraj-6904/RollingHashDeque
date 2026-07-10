@@ -1,0 +1,54 @@
+structure_rules:
+  root_rule:
+    - description: "Repository root: packaging metadata, docs, and top-level dirs"
+    - require: 'README\.md'
+    - require: 'LICENSE'
+    - require: 'pyproject\.toml'
+    - require: '\.pre-commit-config\.yaml'
+    - allow: 'src/'
+    - allow: 'tests/'
+    - allow: '\.github/'
+
+  src_rule:
+    - description: "src/ layout: holds the importable package directory"
+    - allow: 'hashdeque/'
+
+  package_rule:
+    - description: "The hashdeque package: modules and type marker"
+    - require: '__init__\.py'
+    - allow: 'py\.typed'
+    - allow: '.*\.py'
+
+  tests_rule:
+    - description: "Test suite: pytest test modules"
+    - allow: '__init__\.py'
+    - require: 'test_.*\.py'
+    - allow: '.*\.py'
+
+  github_rule:
+    - description: "GitHub configuration directory"
+    - allow: 'workflows/'
+
+  github_workflows_rule:
+    - description: "GitHub Actions workflow definitions"
+    - allow: '.*\.ya?ml'
+
+directory_map:
+  /:
+    - description: "Repository root"
+    - use_rule: root_rule
+  /src/:
+    - description: "Source layout root"
+    - use_rule: src_rule
+  /src/hashdeque/:
+    - description: "Importable package"
+    - use_rule: package_rule
+  /tests/:
+    - description: "Tests"
+    - use_rule: tests_rule
+  /.github/:
+    - description: "GitHub metadata"
+    - use_rule: github_rule
+  /.github/workflows/:
+    - description: "CI/publish workflows"
+    - use_rule: github_workflows_rule
