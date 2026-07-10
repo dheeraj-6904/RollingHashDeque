@@ -1,8 +1,9 @@
 # hashdeque
 
-A string/bytes **deque** that maintains a **rolling hash** of its contents.
-Powers of the base are precomputed, so the hash of the current sequence is
-available in **O(1)** after each push/pop instead of rehashing everything.
+A **deque of characters** (any Unicode symbol) that maintains a **rolling hash**
+of its contents. Powers of the base are precomputed, so the hash of the current
+sequence is available in **O(1)** after each push/pop instead of rehashing
+everything.
 
 - `push_front` / `push_back` — **O(1)**
 - `pop_front` / `pop_back` — **O(1)**
@@ -11,9 +12,6 @@ available in **O(1)** after each push/pop instead of rehashing everything.
 
 Useful for substring/window matching (Rabin–Karp style), deduplication over a
 sliding window, and content-defined chunking.
-
-> Note: the `HashDeque` implementation lands in a follow-up change; this is the
-> packaging scaffold.
 
 ## Install
 
@@ -34,14 +32,16 @@ uv pip install -e ".[dev]"
 from hashdeque import HashDeque
 
 d = HashDeque()
-for ch in b"hello":
+for ch in "hello":
     d.push_back(ch)
-print(d.hash())     # rolling hash of "hello"
+print(d.hash())     # rolling-hash fingerprint of "hello"
 d.pop_front()       # drop 'h'
-print(d.hash())     # rolling hash of "ello", O(1)
+print(d.hash())     # fingerprint of "ello", computed in O(1)
 
-other = HashDeque(b"ello")
-print(d == other)   # O(1) comparison
+other = HashDeque("ello")
+print(d == other)   # True, O(1) comparison
+
+d.verify = True     # opt in to exact verification on a hash match
 ```
 
 ## Test
@@ -59,8 +59,13 @@ hashdeque/
 ├── .pre-commit-config.yaml
 ├── .github/workflows/publish.yml
 ├── src/hashdeque/
-│   ├── __init__.py
+│   ├── __init__.py             # public API
+│   ├── base.py                 # BaseHashDeque (ABC) — the contract
+│   ├── params.py               # HashParams — bases/moduli/inverses
+│   ├── deque.py                # HashDeque — polynomial double-hash implementation
 │   └── py.typed
 └── tests/
+    ├── test_base.py
+    ├── test_params.py
     └── test_hashdeque.py
 ```

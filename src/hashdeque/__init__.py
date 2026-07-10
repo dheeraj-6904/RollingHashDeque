@@ -1,10 +1,24 @@
-"""hashdeque: a string/bytes deque that maintains a rolling hash of its contents.
+"""hashdeque: a string deque that maintains an O(1) rolling hash of its contents.
 
-The concrete ``HashDeque`` implementation is added as a separate module in a
-later step so the algorithm can be developed independently of this packaging
-scaffold.
+Public API:
+
+* :class:`HashDeque` - concrete polynomial double rolling-hash deque.
+* :class:`BaseHashDeque` - abstract base class / extension contract.
+* :class:`HashParams` and :data:`DEFAULT_PARAMS` - hash configuration.
 """
+
+from __future__ import annotations
+
+from .base import BaseHashDeque
+from .deque import HashDeque
+from .params import DEFAULT_PARAMS, HashParams
 
 __version__ = "0.0.1"
 
-__all__: list[str] = []
+__all__ = [
+    "HashDeque",
+    "BaseHashDeque",
+    "HashParams",
+    "DEFAULT_PARAMS",
+    "__version__",
+]
