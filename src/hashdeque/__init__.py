@@ -13,7 +13,7 @@ from .base import BaseHashDeque
 from .deque import HashDeque
 from .params import DEFAULT_PARAMS, HashParams
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 __all__ = [
     "HashDeque",

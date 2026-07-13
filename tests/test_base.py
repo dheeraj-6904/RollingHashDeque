@@ -24,6 +24,13 @@ def test_aliases_match_primitive_operations():
     assert d.popleft() == "a"
 
 
+def test_right_pop_aliases_match_primitive_operations():
+    d = HashDeque("ab")
+    assert d.pop() == "b"
+    d.append("c")
+    assert d.popright() == "c"
+
+
 def test_eq_with_non_deque_is_false():
     d = HashDeque("abc")
     assert d != "abc"

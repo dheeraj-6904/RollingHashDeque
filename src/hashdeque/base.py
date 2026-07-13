@@ -63,8 +63,14 @@ class BaseHashDeque(ABC):
     def append(self, char: str) -> None:
         self.push_back(char)
 
+    def pop(self) -> str:
+        return self.pop_back()
+
     def popleft(self) -> str:
         return self.pop_front()
+
+    def popright(self) -> str:
+        return self.pop_back()
 
     def extend(self, chars: Iterable[str]) -> None:
         """Append each character of ``chars`` to the back."""

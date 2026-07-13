@@ -23,7 +23,7 @@ def current_hashes(d: HashDeque):
 
 
 def test_package_metadata():
-    assert hashdeque.__version__ == "0.0.2"
+    assert hashdeque.__version__ == "0.0.3"
     assert set(hashdeque.__all__) >= {"HashDeque", "BaseHashDeque", "HashParams"}
 
 
